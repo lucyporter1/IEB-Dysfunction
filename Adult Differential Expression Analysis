@@ -1,0 +1,12 @@
+# Load required data and packages:
+library(Seurat)
+library(tidyverse)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+library(qs)
+library(scoomp)
+
+#Run DE (on normalized epithelial cells ony, see "UMAP"):

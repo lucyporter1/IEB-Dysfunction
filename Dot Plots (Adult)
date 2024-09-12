@@ -36,29 +36,30 @@ AJ <- c("CDH1", "CTNNA1", "CTNNB1", "CTNND1")
 #Desmosome: 
 desmo <- c("DSC2", "DSG2", "DSG3")
 
-
-dp_cells_bycond_kong <- DotPlot(kong, features = c(goblet, paneth, muc, sec, abs, isc, rsc), group.by = "disease__ontology_label", scale.by = "size")+
+#Visualization of target gene expression in epithelial cells only, using pre-normalized "epithelial_kong" data (see UMAP):
+dp_cells_byepcell_kong <- DotPlot(epithelial_kong, features = c(goblet, paneth, muc, sec, abs, isc, rsc), group.by = "Celltype", scale.by = "size")+
   theme(axis.text.x = element_text(angle = 45,face = "italic",vjust = 1, hjust=1),
         legend.key.size = unit(4, 'mm'))+
   guides(size = guide_legend(title = "%\nExpressed"))+
   guides(color = guide_colorbar(title = "Expression"))+
   scale_colour_gradient(low = "#ADD8E6", high = "#7F00FF")+
-  labs(y = "Disease State")+
+  labs(y = "Cell Type")+
 coord_flip(xlim = NULL, ylim = NULL, expand = TRUE)
-dp_cells_bycond 
+dp_cells_byepcell_kong
 
-dp_junc_bycond_kong <- DotPlot(kong, features = c(cldn, desmosome, AJ, TJ), group.by = "disease__ontology_label", scale.by = "size")+
+dp_junc_byepcell_kong <- DotPlot(epithelial_kong, features = c(cldn, desmosome, AJ, TJ), group.by = "Celltype", scale.by = "size")+
   theme(axis.text.x = element_text(angle = 45,face = "italic",vjust = 1, hjust=1),
         legend.key.size = unit(4, 'mm'))+
   guides(size = guide_legend(title = "%\nExpressed"))+
   guides(color = guide_colorbar(title = "Expression"))+
   scale_colour_gradient(low = "#ADD8E6", high = "#7F00FF")+
-  labs(y = "Disease Status)+
+  labs(y = "Cell Type")+
   coord_flip(xlim = NULL, ylim = NULL, expand = TRUE)
-dp_junc_bycond_kong
+dp_junc_byepcell_kong
 
-#Expression in epithelial cells only: 
-epithelial_kong <- subset(kong, Celltype %in% c"LGR5+ crypt-base stem cells", "Tuft cells", "Paneth cells", "Enteroendocrine cells", "Transit-amplifying cells", "Enterocytes", "Goblet cells")
+
+
+#Visualization of target gene expression by condition (epithelial cells only)using pre-normalized "epithelial_kong" data (see UMAP):
 
 dp_cells_bycond_kong <- DotPlot(epithelial_kong, features = c(goblet, paneth, muc, sec, abs, isc, rsc), group.by = "disease__ontology_label", scale.by = "size")+
   theme(axis.text.x = element_text(angle = 45,face = "italic",vjust = 1, hjust=1),
@@ -66,7 +67,7 @@ dp_cells_bycond_kong <- DotPlot(epithelial_kong, features = c(goblet, paneth, mu
   guides(size = guide_legend(title = "%\nExpressed"))+
   guides(color = guide_colorbar(title = "Expression"))+
   scale_colour_gradient(low = "#ADD8E6", high = "#7F00FF")+
-  labs(y = "Disease State")+
+  labs(y = "Disease Status")+
 coord_flip(xlim = NULL, ylim = NULL, expand = TRUE)
 dp_cells_bycond_kong
 
@@ -79,3 +80,5 @@ dp_junc_bycond_kong <- DotPlot(epithelial_kong, features = c(cldn, desmosome, AJ
   labs(y = "Disease Status)+
   coord_flip(xlim = NULL, ylim = NULL, expand = TRUE)
 dp_junc_bycond_kong
+
+

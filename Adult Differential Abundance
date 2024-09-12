@@ -7,6 +7,7 @@ library(ggplot2)
 library(dplyr)
 library(patchwork)
 library(qs)
+library(scoomp)
 
 kong <- qread("~/kong.qs")
 
@@ -21,7 +22,7 @@ sc_result_kong_all_cells <- kong |>
   )
 
 plots_kong_all_cells <- plot_summary(sc_result_kong_all_cells)
-plots_kong_all_cells
+print(plots_kong_all_cells)
 
 # Print results for all cells
 print(as_tibble(sc_result_kong_all_cells))
@@ -37,7 +38,7 @@ sc_result_kong_epi_cells <- epithelial_kong |>
   )
 
 plots_kong_epi_cells <- plot_summary(sc_result_kong_epi_cells)
-plots_kong_epi_cells
+print(plots_kong_epi_cells)
 
 # Print results for epithelial cells
 print(as_tibble(sc_result_kong_epi_cells))

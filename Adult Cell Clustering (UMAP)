@@ -6,6 +6,7 @@ library(tibble)
 library(ggplot2)
 library(dplyr) 
 library(patchwork)
+library(qs)
 
 kong <- qread("~/kong.qs")
 Idents(kong) <- kong$Celltype

@@ -51,6 +51,15 @@ head(Idents(kong), 5)
 kong <- RunUMAP (kong, dims = 1:10, label = TRUE)
 DimPlot(kong, reduction = "umap", group.by = "Celltype", label = TRUE)
 
+#Run Condition UMAP:
+kong_CD_diagnosis <- subset(kong, subset = disease__ontology_label == "CD") 
+kong_Non_IBD_diagnosis <- subset(kong, subset = disease__ontology_label == "Non-IBD")
+DimPlot(kong, reduction = "umap", group.by = "Celltype")
+DimPlot(kong_CD_diagnosis, reduction = "umap", group.by = "disease__ontology_label", cols = c("CD" = "#ff2b79"))
+DimPlot(kong_Non_IBD_diagnosis, reduction = "umap", group.by = "disease__ontology_label", cols = c("Non-IBD" = "#3168d6"))
+DimPlot(kong, reduction = "umap", group.by = "disease__ontology_label", cols = c("Non-IBD" = "#3168d6", "CD" = "#ff2b79" )) 
+
+
 #Run Epithelal UMAP: 
 epithelial_kong <- subset(gut, celltype_main %in% c("LGR5+ crypt-base stem cells", "Tuft cells", "Paneth cells", "Enteroendocrine cells", "Transit-amplifying cells", "Enterocytes", "Goblet cells"))
 epithelial_kong <- NormalizeData(epithelial_kong)
@@ -60,3 +69,11 @@ epithelial_kong <- RunPCA(epithelial_kong, features = VariableFeatures(object = 
 ElbowPlot(epithelial_kong)
 epithelial_kong <- RunUMAP(epithelial_kong, dims = 1:10)
 DimPlot(epithelial_kong, reduction = "umap", group.by = "Celltype")
+
+#Run Epithelial Condition UMAP:
+epi_kong_CD_diagnosis <- subset(epithelial_kong, subset = disease__ontology_label == "CD") 
+epi_kong_Non_IBD_diagnosis <- subset(epithelial_kong, subset = disease__ontology_label == "Non-IBD")
+DimPlot(epithelial_kong, reduction = "umap", group.by = "Celltype")
+DimPlot(epi_kong_CD_diagnosis, reduction = "umap", group.by = "disease__ontology_label", cols = c("CD" = "#ff2b79"))
+DimPlot(epi_kong_Non_IBD_diagnosis, reduction = "umap", group.by = "disease__ontology_label", cols = c("Non-IBD" = "#3168d6"))
+DimPlot(epithelial_kong, reduction = "umap", group.by = "disease__ontology_label", cols = c("Non-IBD" = "#3168d6", "CD" = "#ff2b79" )) 

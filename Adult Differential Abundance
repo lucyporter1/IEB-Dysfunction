@@ -1,0 +1,45 @@
+# Load required data and packages:
+library(Seurat)
+library(tidyverse)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(dplyr)
+library(patchwork)
+library(qs)
+
+kong <- qread("~/kong.qs")
+
+# Run DifAb relative to all cells (only epithelial cell proportions extracted):
+sc_result_kong_all_cells <- kong |> 
+  sccomp_glm(
+    formula_composition = ~ disease__ontology_label, 
+    .sample = biosample_id, 
+    .cell_group = Celltype, 
+    bimodal_mean_variability_association = 1, 
+    cores = 10
+  )
+
+plots_kong_all_cells <- plot_summary(sc_result_kong_all_cells)
+plots_kong_all_cells
+
+# Print results for all cells
+print(as_tibble(sc_result_kong_all_cells))
+
+# Run DifAb relative to all epithelial cells only (only epithelial cell proportions extracted):
+sc_result_kong_epi_cells <- epithelial_kong |> 
+  sccomp_glm(
+    formula_composition = ~ disease__ontology_label, 
+    .sample = biosample_id, 
+    .cell_group = Celltype, 
+    bimodal_mean_variability_association = 1, 
+    cores = 10
+  )
+
+plots_kong_epi_cells <- plot_summary(sc_result_kong_epi_cells)
+plots_kong_epi_cells
+
+# Print results for epithelial cells
+print(as_tibble(sc_result_kong_epi_cells))
+
+

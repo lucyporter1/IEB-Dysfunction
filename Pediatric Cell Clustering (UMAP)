@@ -1,6 +1,15 @@
 #Load required data and packages:
+library(Seurat)
+library(tidyverse)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(plyr) 
 
+gut <- gut <- qread("~/fetal_gut_atlas_annotated.qs")
+Idents(gut) <- gut$celltype_main
 
+#Follow Satija Lab Lab workflow for all following steps: 
 #Remove low-quality cells: 
 VlnPlot(gut, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 plot1 <- FeatureScatter(gut, feature1 = "nCount_RNA", feature2 = "percent.mt")
@@ -11,7 +20,7 @@ gut <- subset(gut, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & percent.m
 #Normalize data: 
 gut <- NormalizeData(gut, normalization.method = "LogNormalize", scale.factor = 10000)
 
-#Select for highly variable features: 
+#Select for highly variable features (and view top 10): 
 gut <- FindVariableFeatures(gut, selection.method = "vst", nfeatures = 2000)
 top10 <- head(VariableFeatures(gut), 10) 
 
@@ -20,16 +29,18 @@ plot3 <- VariableFeaturePlot(gut)
 plot4 <- LabelPoints(plot = plot3, points = top10, repel = TRUE)
 plot3 + plot4
 
-#Scale data:
+#Linear transform, "scale", data:
 all.genes <- rownames(gut) 
 gut <- ScaleData(gut, features= all.genes) 
 
-#Linear reduction and dimensionality: 
+#Linear dimensional reduction (noise reduction): 
 gut <- RunPCA(gut, features = VariableFeatures(object = gut))
 VizDimLoadings(gut, dims = 1:2, reduction = "pca")
+
+#Vizualize dimensionality, "noise":
 ElbowPlot(gut) 
 
-#Cluster cells: 
+#Cluster cells, based on dimensionality visualized above: 
 gut <- FindNeighbors(gut, dims = 1:10)
 gut <- FindClusters(gut, resolution = 0.5)
 head(Idents(gut), 5)
@@ -45,5 +56,6 @@ epithelial_gut <- FindVariableFeatures(epithelial_gut, selection.method = "vst",
 all.genes.epithelial <- rownames(epithelial_gut)
 epithelial_gut <- ScaleData(epithelial_gut, features = all.genes.epithelial)
 epithelial_gut <- RunPCA(epithelial_gut, features = VariableFeatures(object = epithelial_gut))
+ElbowPlot(epithelial_gut) 
 epithelial_gut <- RunUMAP(epithelial_gut, dims = 1:10)
 DimPlot(epithelial_gut, reduction = "umap", group.by = "celltype_main")

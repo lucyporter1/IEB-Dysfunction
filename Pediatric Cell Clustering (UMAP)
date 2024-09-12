@@ -4,7 +4,8 @@ library(tidyverse)
 library(tidyr)
 library(tibble)
 library(ggplot2)
-library(plyr) 
+library(dplyr) 
+library(patchwork)
 
 gut <- gut <- qread("~/fetal_gut_atlas_annotated.qs")
 Idents(gut) <- gut$celltype_main

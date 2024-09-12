@@ -6,6 +6,7 @@ library(tibble)
 library(ggplot2)
 library(dplyr) 
 library(patchwork)
+library(qs)
 
 gut <- gut <- qread("~/fetal_gut_atlas_annotated.qs")
 Idents(gut) <- gut$celltype_main

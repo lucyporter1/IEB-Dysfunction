@@ -13,17 +13,19 @@ latelog2fc <- read.csv ("file.path.hidden.csv2")
 treatedlog2fc <- read.csv ("file.path.hidden.csv3")
 
 #Convert CSV to data frame:
-early.df <- as.data.table(early)
-late.df <- as.data.table(late)
-treated.df <- as.data.table(treated)
+early.df <- as.data.table(earlylog2fc)
+late.df <- as.data.table(latelog2fc)
+treated.df <- as.data.table(treatedlog2fc)
 
 #Find mean fold change:  
 cd_log2fc_early <- early.df$CD_LOG
-non_ibd_means_stuart <- set as "0"
 view(cd_log2fc_early)
+
+
 
 #Extract gene names: 
 names(cd_log2fc_early) <- early.df$GENE
+
 
 #Load gene sets (same as used in Adult patient GSEA)
 gene_set_gsea

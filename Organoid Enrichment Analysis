@@ -27,9 +27,11 @@ cd_log2fc_treated <- treated.df$CD_LOG
 #Extract gene names: 
 names(cd_log2fc_early) <- early.df$GENE
 
+names(cd_log2fc_late) <- late.df$GENE
 
+names(cd_log2fc_treated) <- treated.df$GENE
 
-#Load gene sets (same as used in Adult patient GSEA)
+#Load gene sets (same as used in Adult patient GSEA, already loaded into R)
 gene_set_gsea
 
 #Perform GSEA (with fgsea package), early-passage organoids:

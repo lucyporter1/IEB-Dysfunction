@@ -206,4 +206,7 @@ focal_ad_genes <- unique(c("ITGA9", "PELO", "MYLK", "RAPGEF1", "ACTN1", "BRAF", 
     "TNN", "DOCK1", "ITGAD", "MAPK6", "TNK2", "COL5A3", "PDGFC", "GSK3B", 
     "PAK4", "PDGFD", "PIK3CB", "PIK3R4", "TNXB", "TNK1", "COL4A6"))
 
+#Perform 
+
+
 

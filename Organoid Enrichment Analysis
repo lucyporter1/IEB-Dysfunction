@@ -19,12 +19,14 @@ treated.df <- as.data.table(treatedlog2fc)
 
 #Find mean fold change:  
 cd_log2fc_early <- early.df$CD_LOG
-view(cd_log2fc_early)
 
+cd_log2fc_late <- late.df$CD_LOG
 
+cd_log2fc_treated <- treated.df$CD_LOG
 
 #Extract gene names: 
 names(cd_log2fc_early) <- early.df$GENE
+
 
 
 #Load gene sets (same as used in Adult patient GSEA)

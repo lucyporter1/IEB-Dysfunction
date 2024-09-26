@@ -212,8 +212,7 @@ Goblet_Cells = goblet_genes,
 Absorptive_Enterocytes = abs_ent_genes, 
 Tight_Junction = tj_genes,
 Adherens_Junction =aj_genes, 
-Desmosome_Junction = desmo_genes,
-Focal_Adhesion = focal_ad_genes)
+Desmosome_Junction = desmo_genes)
 
 ranks_epi <- setNames(ranked_genes_epi$score, ranked_genes_epi$gene)
 

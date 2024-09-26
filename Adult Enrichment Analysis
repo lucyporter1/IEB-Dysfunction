@@ -157,33 +157,6 @@ desmo_genes <-unique(c("ATP2A2", "CAV1", "CDH1", "CKAP4", "CTNND1", "DSC2", "DSC
   "DSG3", "DSP", "EGFR", "JUP", "KIF2A", "KTN1", "PKP1", "PKP2", "PKP3", "PKP4", 
   "PRKCA"))
 
-
-#Focal Adhesion: 
-focal_ad_genes <- unique(c("ITGA9", "PELO", "MYLK", "RAPGEF1", "ACTN1", "BRAF", "RAP1A", "RAF1", 
-    "ACTB", "ACTG1", "AKT1", "AKT2", "BIRC3", "BIRC2", "ARAF", "RHOA", 
-    "RHOB", "ARHGAP5", "BAD", "BCL2", "BLK", "CAPN1", "CAV1", "CAV2", 
-    "CAV3", "CCND1", "CCND2", "CCND3", "CDC42", "CHAD", "COL11A1", 
-    "COL11A2", "COL2A1", "COL3A1", "COL4A1", "COL4A2", "COL4A4", 
-    "COL5A1", "COL5A2", "COL6A2", "COL1A1", "COL1A2", "BCAR1", "CRK", 
-    "CRKL", "DIAPH1", "EGF", "EGFR", "ELK1", "ERBB2", "PTK2", "FGR", 
-    "VEGFD", "FLT1", "FN1", "FYN", "GRB2", "HCK", "HGF", "IBSP", "IGF1", 
-    "ILK", "ITGA2", "ITGA2B", "ITGA3", "ITGA4", "ITGA5", "ITGA6", "ITGA7", 
-    "ITGAE", "ITGAL", "ITGAM", "ITGAV", "ITGAX", "ITGB1", "ITGB2", "ITGB3", 
-    "ITGB5", "ITGB6", "ITGB7", "JUN", "LAMA1", "LAMA2", "LAMA3", "LAMA4", 
-    "LAMA5", "LAMB1", "LAMB2", "LAMB3", "LAMC2", "PARVB", "RAC3", "MET", 
-    "MYL6", "PPP1R12A", "PAK1", "PAK3", "PDGFA", "PDGFB", "PDGFRA", 
-    "PDGFRB", "PDPK1", "PGF", "PIK3CA", "PIK3CD", "PIK3R1", "PIK3R2", 
-    "PIP5K1C", "PTEN", "FLNA", "ITGB4", "PXN", "RAC1", "RAC2", "RELN", 
-    "ROCK1", "ROCK2", "SELENOP", "SHC1", "SHC3", "PTK6", "SOS1", "SPP1", 
-    "SRC", "SRMS", "ITGA10", "PAK6", "RAP1B", "THBS1", "THBS2", "THBS3", 
-    "THBS4", "TLN1", "TNC", "TNR", "TXK", "VASP", "VAV1", "VCL", "VEGFA", 
-    "VEGFB", "VEGFC", "VTN", "VWF", "PAK2", "MAPK4", "LAMC1", "FARP2", 
-    "ZYX", "MYLK2", "TESK2", "AKT3", "LAMC3", "MAP2K5", "MAPK7", "ITGA8", 
-    "PAK5", "STYK1", "MAP2K1", "MAP2K2", "MAP2K3", "MAP2K6", "MAPK1", 
-    "MAPK8", "MAPK9", "MAPK12", "PIK3CG", "ITGA11", "PIK3R5", "ITGB8", 
-    "TNN", "DOCK1", "ITGAD", "MAPK6", "TNK2", "COL5A3", "PDGFC", "GSK3B", 
-    "PAK4", "PDGFD", "PIK3CB", "PIK3R4", "TNXB", "TNK1", "COL4A6"))
-
 #Update grouping of expression by diagnosis: 
 Idents(kong) <- kong$disease__ontology_label
 kong$disease__ontology_label <- gsub("normal", "Non-IBD", kong$disease__ontology_label)
@@ -215,8 +188,7 @@ Mature_Goblet = mature_goblet_genes,
 Absorptive_Enterocytes = abs_ent_genes, 
 Tight_Junction = tj_genes,
 Adherens_Junction =aj_genes, 
-Desmosome_Junction = desmo_genes,
-Focal_Adhesion = focal_ad_genes)
+Desmosome_Junction = desmo_genes)
 
 ranks <- setNames(ranked_genes$score, ranked_genes$gene)
 

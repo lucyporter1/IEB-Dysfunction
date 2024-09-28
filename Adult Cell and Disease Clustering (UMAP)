@@ -61,9 +61,11 @@ DimPlot(kong, reduction = "umap", group.by = "disease__ontology_label", cols = c
 
 
 #Run Epithelal UMAP: 
-epithelial_kong <- subset(gut, celltype_main %in% c("LGR5+ crypt-base stem cells", "Tuft cells", "Paneth cells", "Enteroendocrine cells", "Transit-amplifying cells", "Enterocytes", "Goblet cells"))
+epithelial_kong <- subset(kong, Celltype %in% c("LGR5+ crypt-base stem cells", "Tuft cells", "Paneth cells", "Enteroendocrine cells", "Transit-amplifying cells", "Enterocytes", "Goblet cells"))
 epithelial_kong <- NormalizeData(epithelial_kong)
 epithelial_kong <- FindVariableFeatures(epithelial_kong, selection.method = "vst", nfeatures = 2000)
+top10 <- head(VariableFeatures(kong), 10)
+print(top10)
 epithelial_kong <- ScaleData(epithelial_kong, features = all.genes)
 epithelial_kong <- RunPCA(epithelial_kong, features = VariableFeatures(object = epithelial_kong))
 ElbowPlot(epithelial_kong)

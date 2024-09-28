@@ -21,10 +21,10 @@ sc_result_kong_all_cells <- kong |>
     cores = 10
   )
 
-plots_kong_all_cells <- plot_summary(sc_result_kong_all_cells)
+plots_kong_all_cells <- plot_summary(sc_result_kong_all_cells):
 print(plots_kong_all_cells)
 
-# Print results for all cells
+# Print results for all cells:
 print(as_tibble(sc_result_kong_all_cells))
 
 # Run differential abundance analysis relative to all epithelial cells only (only epithelial cell proportions extracted):
@@ -40,7 +40,7 @@ sc_result_kong_epi_cells <- epithelial_kong |>
 plots_kong_epi_cells <- plot_summary(sc_result_kong_epi_cells)
 print(plots_kong_epi_cells)
 
-# Print results for epithelial cells
+# Print results for epithelial cells:
 print(as_tibble(sc_result_kong_epi_cells))
 
 

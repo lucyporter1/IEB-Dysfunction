@@ -1,4 +1,4 @@
-#Read packages
+#Read packages:
 library(dplyr)
 library(fgsea)
 library(ggplot2)
@@ -17,7 +17,7 @@ revival_genes <- unique(c("MALAT1", "LY6D", "CLU", "CLDN4", "SPRR1A", "AREG", "G
                     "CXCL16", "2210407C18RIK", "F11R", "XIST", "REG3B", "PRAP1", "GUCA2B", "ITM2B", "NUPR1", 
                     "ANXA1", "BASP1", "KRT8", "TOB1", "ITGB4", "CDH17", "ANXA2", "PLEC"))
 
-# LGR5 Stem Cells
+# LGR5 Stem Cells:
 LGR5_genes <- unique(c("LGR5", "A930009A15RIK", "LIMCH1", "TNFRSF19", "GZMA", "SLC38A4", "E330027M22RIK", "FSTL1", 
                  "A730054J21RIK", "KLHL13", "CCDC3", "CHST2", "KIF26B", "FAM43A", "FAM49A", "ARL4C", 
                  "WWTR1", "BEX4", "DGKG", "CLU", "CCDC46", "PCDH8", "PGC", "LDHB", "ASCL2", "FAM65B", 

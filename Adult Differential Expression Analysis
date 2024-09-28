@@ -14,7 +14,7 @@ kong_Non_IBD_diagnosis_epi <- subset(epithelial_kong, subset = disease__ontology
 
 Idents(epithelial_kong) <- epithelial_kong$disease__ontology_label
 
-gsea_markers_kong_epi <- FindMarkers(kong_CD_diagnosis_epi, ident.1 = "CD", ident.2 = "Non-IBD", min.pct = 0.5)
+gsea_markers_kong_epi <- FindMarkers(epithelial_kong, ident.1 = "CD", ident.2 = "Non-IBD", min.pct = 0.5)
 
 write.table(gsea_markers_kong_epi, file = "kongde.txt", sep = "\t", row.names = TRUE, col.names = TRUE, quote = FALSE)
 

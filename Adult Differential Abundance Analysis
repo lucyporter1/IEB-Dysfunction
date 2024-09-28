@@ -11,7 +11,7 @@ library(scoomp)
 
 kong <- qread("~/kong.qs")
 
-# Run DifAb relative to all cells (only epithelial cell proportions extracted):
+# Run differential abundance analysis relative to all cells (only epithelial cell proportions extracted):
 sc_result_kong_all_cells <- kong |> 
   sccomp_glm(
     formula_composition = ~ disease__ontology_label, 
@@ -27,7 +27,7 @@ print(plots_kong_all_cells)
 # Print results for all cells
 print(as_tibble(sc_result_kong_all_cells))
 
-# Run DifAb relative to all epithelial cells only (only epithelial cell proportions extracted):
+# Run differential abundance analysis relative to all epithelial cells only (only epithelial cell proportions extracted):
 sc_result_kong_epi_cells <- epithelial_kong |> 
   sccomp_glm(
     formula_composition = ~ disease__ontology_label, 

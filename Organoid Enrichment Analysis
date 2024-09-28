@@ -6,12 +6,12 @@ library(data.table)
 
 #Read pre-normalized files (normalized by Dr Stuart Archer using Voom/Limma in alignment with Degust settings), extracted for avlog2 fold change in CD vs Non-IBD organoids:
 #Read CSV files for early-passage and late-passage orgnaoids (file path hidden for privacy):
-earlylog2fc <-read.csv ("file.path.hidden.csv1")
-latelog2fc <- read.csv ("file.path.hidden.csv2")
+early_log2fc <- read.csv ("file.path.hidden.csv1")
+late_log2fc <- read.csv ("file.path.hidden.csv2")
 
 #Convert CSV to data frame:
-early.df <- as.data.table(earlylog2fc)
-late.df <- as.data.table(latelog2fc)
+early_df <- as.data.table(early_log2fc)
+late_df <- as.data.table(late_log2fc)
 
 #Find mean fold change:  
 cd_log2fc_early <- early.df$CD_LOG

@@ -12,13 +12,13 @@ revival_genes <- unique(c("MALAT1", "LY6D", "CLU", "CLDN4", "SPRR1A", "AREG", "G
 
 # LGR5 Stem Cells
 LGR5_genes <- unique(c("LGR5", "A930009A15RIK", "LIMCH1", "TNFRSF19", "GZMA", "SLC38A4", "E330027M22RIK", "FSTL1", 
-                 "A730054J21RIK", "KLHL13", "CCDC3", "FSTL1", "CHST2", "KIF26B", "FAM43A", "FAM49A", "ARL4C", 
+                 "A730054J21RIK", "KLHL13", "CCDC3", "CHST2", "KIF26B", "FAM43A", "FAM49A", "ARL4C", 
                  "WWTR1", "BEX4", "DGKG", "CLU", "CCDC46", "PCDH8", "PGC", "LDHB", "ASCL2", "FAM65B", 
                  "ASGR1", "LECT2", "RASSF5", "NAV1", "ZNF618", "CYP2E1", "IRS1", "SLC1A2", "SERTAD4", "GPER", 
-                 "SLCO3A1", "LIMCH1", "PTGDS", "VWA2", "FSCN1", "ABTB2", "ASCL2", "GPER", "SMO", "IGFBP4", 
+                 "SLCO3A1", "LIMCH1", "PTGDS", "VWA2", "FSCN1", "ABTB2", "SMO", "IGFBP4", 
                  "SOX4", "GRAMD1A", "ANGPT2", "PXDN", "LOC100132413", "SCN2B", "TGTP", "B230114P17RIK", "SMO", 
-                 "VAV3", "APCDD1", "CASP12", "APCDD1", "VAV3", "PCDH8", "MACC1", "RGS7BP", "SLC16A2", "IGFBP4", 
-                 "SLIT2", "SORCS2", "MPP3", "ZBTB16", "ASCL2", "CBS", "PI3", "LOC100132413", "BEX1", "RGMB", 
+                 "VAV3", "APCDD1", "CASP12", "APCDD1", "PCDH8", "MACC1", "RGS7BP", "SLC16A2", "IGFBP4", 
+                 "SLIT2", "SORCS2", "MPP3", "ZBTB16", "CBS", "PI3", "LOC100132413", "BEX1", "RGMB", 
                  "SLC1A2", "SORBS2", "SLC25A27", "MEX3A", "MIPOL1", "IGFBP4", "NR2E3", "CIB2", "4933406C10RIK", 
                  "ZNF618", "BRAF", "FAM20C", "KIF12", "FAM115A", "IGFBP4", "AKR1D1", "LDHB", "SDR16C5", "PIK3IP1", 
                  "ESRRG", "E230029C05RIK", "CAP2", "FGFR4", "SLC16A2", "MYLK3", "NOTCH4", "GPR126", "IGFBP4", 
@@ -179,7 +179,7 @@ fgsea_res_kong_all %>%
     arrange(desc(abs(NES))) %>% 
     top_n(10, -padj)
 
-# Inspect the results
+# View the results
 print(head(fgsea_res_kong_all))
 
 #Run GSEA for epithelial cells only: 
@@ -223,5 +223,5 @@ fgsea_res_kong_epi %>%
     arrange(desc(abs(NES))) %>% 
     top_n(10, -padj)
 
-# Inspect the results
+# View the results
 print(head(fgsea_res_kong_epi))

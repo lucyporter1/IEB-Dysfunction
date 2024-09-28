@@ -1,37 +1,36 @@
-Cell quality analysis: 
+# Cell quality analysis: 
 qual_epi_gut <- subset(epithelial_gut, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & percent.mt < 5)
 
+# Quality criteria: 
 VlnPlot(epithelial_gut, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
 plot1 <- FeatureScatter(epithelial_gut, feature1 = "nCount_RNA", feature2 = "percent.mt")
 plot2 <- FeatureScatter(epithelial_gut, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
 plot1 + plot2 
-qual_gut_epi1 <- subset(epithelial_gut, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & percent.mt < 5)
 
+# Normalize data: 
 gut <- NormalizeData(gut, normalization.method = "LogNormalize", scale.factor = 10000)
 
-# Step 1: Total number of cells in the original object
+# Calculate total cell number:
 total_cells <- ncol(epithelial_gut)
 
-# Step 2: Number of cells after filtering
-filtered_cells <- ncol(qual_gut_epi1)
+# Calculate number of cells after filtering:
+filtered_cells <- ncol(qual_epi_gut)
 
+# Calculate excluded percentage of cells:
 excluded_percentage <- ((total_cells - filtered_cells) / total_cells) * 100
 
-# Print the percentage of excluded cells
-excluded_percentage
-
-
-# Assuming 'epithelial_gut' is your Seurat object
+# View excluded cells:
+print(paste("Excluded percentage:", excluded_percentage))
 
 # Extract metadata
 metadata <- epithelial_gut@meta.data
 
-# Identify excluded cells based on your criteria
+# Validate excluded cells based on criteria
 excluded_cells <- metadata[metadata$nFeature_RNA <= 200 | 
                              metadata$nFeature_RNA >= 2500 | 
                              metadata$percent.mt >= 5, ]
 
-# Create a data frame for ggplot
+# Plot excluded cells
 plot_data <- metadata
 plot_data$Excluded <- ifelse(rownames(plot_data) %in% rownames(excluded_cells), "Excluded", "Included")
 
@@ -41,43 +40,27 @@ p1 <- ggplot(plot_data, aes(x = nFeature_RNA, fill = Excluded)) +
   theme_minimal() +
   labs(title = "Distribution of nFeature_RNA", x = "nFeature_RNA", y = "Cell Count")
 
-library(ggplot2)
 # Plot the distribution of percent.mt
 p2 <- ggplot(plot_data, aes(x = percent.mt, fill = Excluded)) + 
   geom_histogram(bins = 50, position = "identity", alpha = 0.6) +
   theme_minimal() +
   labs(title = "Distribution of percent.mt", x = "percent.mt", y = "Cell Count")
 
-# Display the plots
-p1
-p2
+# View the plots
+print(p1)
+print(p2)
 
-
-# Total number of cells before filtering
-total_cells <- ncol(epithelial_gut)
-
-# Number of cells after filtering
-filtered_cells <- ncol(qual_epi_gut)
-
-# Number of excluded cells
-excluded_cells <- total_cells - filtered_cells
-
-percentage_excluded <- (excluded_cells / total_cells) * 100
-
-# Print the percentage
-percentage_excluded
-
-total_cells <- ncol(epithelial_gut)
+# Number of excluded cells by criteria
 excluded_nFeature_low <- ncol(subset(epithelial_gut, subset = nFeature_RNA <= 200))
 excluded_nFeature_high <- ncol(subset(epithelial_gut, subset = nFeature_RNA >= 2500))
 excluded_percent_mt <- ncol(subset(epithelial_gut, subset = percent.mt >= 5))
+
+# Calculate percentages
 percentage_excluded_nFeature_low <- (excluded_nFeature_low / total_cells) * 100
 percentage_excluded_nFeature_high <- (excluded_nFeature_high / total_cells) * 100
 percentage_excluded_percent_mt <- (excluded_percent_mt / total_cells) * 100
 
+# Print excluded percentage of cells for each critera:
 cat("Percentage of cells excluded for nFeature_RNA <= 200: ", percentage_excluded_nFeature_low, "%\n")
 cat("Percentage of cells excluded for nFeature_RNA >= 2500: ", percentage_excluded_nFeature_high, "%\n")
 cat("Percentage of cells excluded for percent.mt >= 5: ", percentage_excluded_percent_mt, "%\n")
-
-
-

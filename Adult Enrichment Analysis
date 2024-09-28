@@ -2,6 +2,13 @@
 library(dplyr)
 library(fgsea)
 library(ggplot2)
+library(Seurat)
+library(tidyverse)
+library(tidyr)
+library(tibble)
+library(patchwork)
+library(qs)
+
 
 #Make Gene-sets (taken from various sources, noted in Materials and Methods (Table 2.15)):
 revival_genes <- unique(c("MALAT1", "LY6D", "CLU", "CLDN4", "SPRR1A", "AREG", "GSTA1", "TM4SF4", "LYPD8", "NEAT1", "UBD", 

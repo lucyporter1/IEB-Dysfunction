@@ -58,7 +58,7 @@ cycling_ta_genes <- unique(c("LGALS4", "SPC25", "CKAP2L", "SKA1", "TICRR", "CENP
   "CTD-2090I13.1", "KCNJ3", "THOC3", "TRAP1", "NASP", "AC009501.4", "PCNA", 
   "UGT2B17"))
 
-#Paneth Cells
+#Paneth Cells:
 paneth_genes <- unique(c("DEFA5", "DEFA6", "REG3A", "REG1A", "DCN", "JCHAIN", "PRSS2", "MGP", "OLFM4", 
   "PLA2G2A", "FABP6", "ITLN2", "IGHV12", "SFRP2", "IGKV320", "IGLV140", "IGHV118", 
   "CFD", "IGHV459", "IGHA1", "LUM", "SPARCL1", "IGLV319", "IGHV321", "IGLV223", 
@@ -186,7 +186,7 @@ fgsea_res_kong_all %>%
     arrange(desc(abs(NES))) %>% 
     top_n(10, -padj)
 
-# View the results
+# View results:
 print(head(fgsea_res_kong_all))
 
 #Run GSEA for epithelial cells only: 
@@ -194,7 +194,7 @@ Idents(epithelial_kong) <- epithelial_kong$disease__ontology_label
 epithelial_kong$disease__ontology_label <- gsub("normal", "Non-IBD", epithelial_kong$disease__ontology_label)
 epithelial_kong$disease__ontology_label <- gsub("Crohn's disease", "CD", epithelial_kong$disease__ontology_label)
 
-# Subset epithelial data by diagnosis
+# Subset epithelial data by diagnosis:
 kong_CD_diagnosis_epi <- subset(epithelial_kong, subset = disease__ontology_label == "CD")
 kong_Non_IBD_diagnosis_epi <- subset(epithelial_kong, subset = disease__ontology_label == "Non-IBD")
 
@@ -230,5 +230,5 @@ fgsea_res_kong_epi %>%
     arrange(desc(abs(NES))) %>% 
     top_n(10, -padj)
 
-# View the results
+# View results: 
 print(head(fgsea_res_kong_epi))

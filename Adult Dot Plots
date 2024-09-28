@@ -1,3 +1,5 @@
+#Note this was not shown in thesis.
+
 #Check diagnosis is correctly labelled: 
 disease__ontology_label <- gsub("normal", "Non-IBD",kong$disease__ontology_label)
 kong$disease__ontology_label <- gsub("Crohn's disease", "CD",kong$disease__ontology_label)

@@ -1,4 +1,4 @@
-#Read packages
+#Read packages:
 library(dplyr)
 library(fgsea)
 library(ggplot2)
@@ -25,7 +25,7 @@ names(cd_log2fc_early) <- early.df$GENE
 names(cd_log2fc_late) <- late.df$GENE
 
 
-#Load gene sets (same as used in Adult patient GSEA, already loaded into R)
+#Load gene sets (same as used in Adult patient GSEA, already loaded into R):
 gene_set_gsea
 
 #Perform GSEA (with fgsea package), early-passage organoids:

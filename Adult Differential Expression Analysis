@@ -10,14 +10,15 @@ library(qs)
 library(scoomp)
 
 #Run DE (on normalized epithelial cells ony, see "UMAP"):
-kong_CD_diagnosis <- subset(epithelial_kong, subset = disease__ontology_label == "CD") 
-kong_Non_IBD_diagnosis <- subset(epithelial_kong, subset = disease__ontology_label == "Non-IBD")
+kong_CD_diagnosis_epi <- subset(epithelial_kong, subset = disease__ontology_label == "CD") 
+kong_Non_IBD_diagnosis_epi <- subset(epithelial_kong, subset = disease__ontology_label == "Non-IBD")
 
 Idents(epithelial_kong) <- epithelial_kong$disease__ontology_label
 
-gsea_markers_kong <- FindMarkers(kong_CD_diagnosis, ident.1 = "CD", ident.2 = "Non-IBD", min.pct = 0.5)
+gsea_markers_kong_epi <- FindMarkers(kong_CD_diagnosis, ident.1 = "CD", ident.2 = "Non-IBD", min.pct = 0.5)
 
-write.table(gsea_markers_kong, file = "kongde.txt", row.names = TRUE, col.names = TRUE, quote = FALSE)
+write.table(gsea_markers_kong_epi, file = "kongde.txt", row.names = TRUE, col.names = TRUE, quote = FALSE)
 
+#Note DE for all cells shown in 'Adult Enrichment Analysis' Page
 
 

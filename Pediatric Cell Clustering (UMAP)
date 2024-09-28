@@ -8,7 +8,7 @@ library(dplyr)
 library(patchwork)
 library(qs)
 
-gut <- gut <- qread("~/fetal_gut_atlas_annotated.qs")
+gut <- qread("~/fetal_gut_atlas_annotated.qs")
 Idents(gut) <- gut$celltype_main
 
 #Follow Satija Lab Lab workflow for all following steps: 
@@ -25,6 +25,7 @@ gut <- NormalizeData(gut, normalization.method = "LogNormalize", scale.factor = 
 #Select for highly variable features (and view top 10): 
 gut <- FindVariableFeatures(gut, selection.method = "vst", nfeatures = 2000)
 top10 <- head(VariableFeatures(gut), 10) 
+print(top10)
 
 #Plot variable features:
 plot3 <- VariableFeaturePlot(gut)
@@ -32,8 +33,8 @@ plot4 <- LabelPoints(plot = plot3, points = top10, repel = TRUE)
 plot3 + plot4
 
 #Linear transform, "scale", data:
-all.genes <- rownames(gut) 
-gut <- ScaleData(gut, features= all.genes) 
+all_genes <- rownames(gut) 
+gut <- ScaleData(gut, features= all_genes) 
 
 #Linear dimensional reduction (noise reduction): 
 gut <- RunPCA(gut, features = VariableFeatures(object = gut))
@@ -55,8 +56,8 @@ DimPlot(gut, reduction = "umap", group.by = "celltype_main", label = TRUE)
 epithelial_gut <- subset(gut, celltype_main %in% c("Goblet cells", "Enterocytes", "Transit-amplifying cells"))
 epithelial_gut <- NormalizeData(epithelial_gut)
 epithelial_gut <- FindVariableFeatures(epithelial_gut, selection.method = "vst", nfeatures = 2000)
-all.genes.epithelial <- rownames(epithelial_gut)
-epithelial_gut <- ScaleData(epithelial_gut, features = all.genes.epithelial)
+all_genes_epithelial <- rownames(epithelial_gut)
+epithelial_gut <- ScaleData(epithelial_gut, features = all_genes_epithelial)
 epithelial_gut <- RunPCA(epithelial_gut, features = VariableFeatures(object = epithelial_gut))
 ElbowPlot(epithelial_gut) 
 epithelial_gut <- RunUMAP(epithelial_gut, dims = 1:10)

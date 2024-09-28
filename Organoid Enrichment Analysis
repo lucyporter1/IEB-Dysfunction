@@ -9,27 +9,21 @@ library(data.table)
 earlylog2fc <-read.csv ("file.path.hidden.csv1")
 latelog2fc <- read.csv ("file.path.hidden.csv2")
 
-#Read CSV files for treated organoids by condition (file path hidden for privacy):
-treatedlog2fc <- read.csv ("file.path.hidden.csv3")
-
 #Convert CSV to data frame:
 early.df <- as.data.table(earlylog2fc)
 late.df <- as.data.table(latelog2fc)
-treated.df <- as.data.table(treatedlog2fc)
 
 #Find mean fold change:  
 cd_log2fc_early <- early.df$CD_LOG
 
 cd_log2fc_late <- late.df$CD_LOG
 
-cd_log2fc_treated <- treated.df$CD_LOG
 
 #Assign names to log2FC, ensure vector correctly named for use in GSEA: 
 names(cd_log2fc_early) <- early.df$GENE
 
 names(cd_log2fc_late) <- late.df$GENE
 
-names(cd_log2fc_treated) <- treated.df$GENE
 
 #Load gene sets (same as used in Adult patient GSEA, already loaded into R)
 gene_set_gsea
@@ -60,18 +54,6 @@ fgsea_results_late %>%
 
 print(fgsea_results_late)
 
-#Perform GSEA (with fgsea package), treated organoids:
-fgsea_results_treated <- fgseaMultilevel(pathways = gene_set_gsea,
-                                        stats = cd_log2fc_treated,
-                                        minSize = 10,
-                                        maxSize = 500)
-
-#Arrange and read results: 
-fgsea_results_treated %>%
-  arrange(desc(abs(NES))) %>%
-  top_n(20, -padj)
-
-print(fgsea_results_treated)
 
 
 
